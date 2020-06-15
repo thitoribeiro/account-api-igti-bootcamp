@@ -1,10 +1,11 @@
 var express = require("express");
 var router = express.Router();
-var fs = require("fs");
+var fs = require("fs").promises;
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   let account = req.body;
-  fs.readFile(global.fileName, "utf8", (err, data) => {
+  let data = await fs.readFile(global.fileName, "utf8");
+  
     try {
       if (err) throw err;
 
